@@ -1,7 +1,7 @@
 "use client"
 import {defineChain} from "viem";
 import {Outfit} from "next/font/google";
-import "./global.css";
+import "./globals.css";
 import  {PrivyProvider} from  "@privy-io/react-auth";
 const font= Outfit({subsets:["latin"]});
 
