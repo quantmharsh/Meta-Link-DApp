@@ -207,3 +207,4 @@ contract MetaLink {
         return users[username].visibility;
     }
 }
+// Deployed address :  0xb965121E106167DAa47B4a1CE40dc59882905f59
