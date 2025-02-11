@@ -1,5 +1,6 @@
 import Navbar from '@/components/navbar/navbar'
 import React from 'react'
+import HeroSection from './hero-section'
 
 type Props = {}
 
@@ -11,6 +12,7 @@ const page = (props: Props) => {
     Section
   */}  
     <Navbar/>
+    <HeroSection/>
 
 
     </div>
