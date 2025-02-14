@@ -2,7 +2,7 @@ import { IconPhotoUp } from "@tabler/icons-react";
 import React, { useState, useCallback, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 
-const customImageUploader = ({ onImagesChange }) => {
+const CustomImageUploader = ({ onImagesChange }) => {
 	const [images, setImages] = useState([]);
 	const onDrop = useCallback(
 		(acceptedFiles) => {
@@ -81,3 +81,4 @@ const customImageUploader = ({ onImagesChange }) => {
 		</div>
 	);
 };
+export default CustomImageUploader;
