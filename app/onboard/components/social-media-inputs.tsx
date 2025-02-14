@@ -7,21 +7,22 @@ interface SocialMediaInputsProps {
     handleChange:(name:string , value:any)=>void;
     errors:any;
 }
-const socialMediaInputs: React.FC<SocialMediaInputsProps>=({
+const socialMediaInputs:React.FC<SocialMediaInputsProps>=({
     formData,
     handleChange , errors
 })=>(
     <>
     <FormItem className="items-center justify-center w-full">
         <FormLabel className="text-sm">
-            {errors?.x && <p className="text-red-500 text-xs mt-1">
+            {errors?.x && 
+            <p className="text-red-500 text-xs mt-1">
                 {
                     errors?.x
                 }
                 
                 </p>}
                 X (Formerly Twitter)
-
+                    
         </FormLabel>
         <FormControl>
             <Input
@@ -34,7 +35,7 @@ const socialMediaInputs: React.FC<SocialMediaInputsProps>=({
     </FormItem>
     <FormItem className="items-center justify-center w-full">
         <FormLabel className="text-sm">
-            {errors?.instaram && <p className="text-red-500 text-xs mt-1">
+            {errors?.instaram && <p className="text-red-500 text-xs  mt-1">
                 {
                     errors?.instagram
                 }

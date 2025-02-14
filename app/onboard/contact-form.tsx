@@ -204,6 +204,110 @@ const validateUrl=(url:string , pattern:string)=>{
   }),
  };
 
- 
+ //Image Upload & changes
+ const handleImagesChange=async(files :File[])=>{
+
+const file=files[0];
+try {
+  const form =new FormData();
+  form.append("file", file);
+  form.append("pinataMetadata" , JSON.stringify({name:file.name }));
+
+  form.append("pinataOptions",JSON.stringify({cidVersion:1}));
+
+  const options={
+    method:"POST",
+    headers:{
+      Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiJlMDkzNzRkZi1lNDNlLTQzZGYtYTQ4Mi1jZjBlYTRkYWI0MDAiLCJlbWFpbCI6InNyaXZhc3RhdmFoMjQwQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6IkZSQTEifSx7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6Ik5ZQzEifV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiIxNzNmZWMzNWRmOGU1MzQ1OGUxYiIsInNjb3BlZEtleVNlY3JldCI6ImNkYThkMTVjMGUxNDg2MTdhN2Q0YWJmOWMzNjRmZjA4MjNjODViZTBhNWEzYjJmZGZhZjA0ZGU3ZDg5MGM1MjgiLCJleHAiOjE3NzA4MDkzMzZ9.SYBgqDUf1lnUxfzyWtWqBFylBQMpYdH561oVTmNQ3Kk",
+    },
+    body:form,
+  };
+  const response=await fetch("https://api.pinata.cloud/pinning/pinFileToIPFS",
+        options);
+        //get image from IPFS 
+        const responseData=await response.json();
+        if(responseData.error){
+          throw new Error(responseData.error);
+        }
+        //getting fileURL
+        const fileUrl=`https://gateway.pinata.cloud/ipfs/${responseData.IpfsHash}`;
+        setFormData((prev)=>({...prev , imageUrl:fileUrl}));
+
+
+
+} catch (error) {
+         console.error("Error uploading image",error);  
+}
+ };
+ const onSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setLoading(true);
+  try {
+    const basicInfo = {
+      firstName: formData.first_name,
+      lastName: formData.last_name,
+      email: formData.email,
+      homeAddress: formData.home_address,
+      dateOfBirth: formData.date_of_birth,
+      phoneNumber: formData.phone_number,
+    };
+
+    const professionalInfo = {
+      education: formData.education,
+      workHistory: formData.work_history,
+      jobTitle: formData.job_title,
+      info: formData.info,
+      skills: formData.skills,
+      imageURL: formData.imageUrl,
+    };
+
+    const socialLinks = {
+      x: formData.x || "",
+      instagram: formData.instagram || "",
+      github: formData.github || "",
+      discord: formData.discord || "",
+      linkedin: formData.linkedin || "",
+    };
+
+    const visibility = {
+      education: true,
+      workHistory: true,
+      phoneNumber: true,
+      homeAddress: true,
+      dateOfBirth: true,
+    };
+
+    if (
+      !formData.username ||
+      !basicInfo.firstName ||
+      !basicInfo.lastName ||
+      !basicInfo.email
+    ) {
+      throw new Error("Required fields are missing.");
+    }
+
+    const receipt = await createUser(
+      formData.username,
+      basicInfo,
+      professionalInfo,
+      socialLinks,
+      visibility
+    );
+    console.log("User created:", receipt);
+    toast({
+      title: "",
+      description: "User created successfully",
+    });
+    setSubmitted(true);
+  } catch (error: any) {
+    toast({
+      title: "Error",
+      description: error.message || "Something went wrong",
+    });
+  } finally {
+    setLoading(false);
+  }
+};
+
 
 }
