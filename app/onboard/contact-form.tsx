@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
-import { Form, FormControl, FormItem, FormLabel } from "@/components/ui/form";
+import { Form, FormControl, FormDescription, FormItem, FormLabel } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import {
@@ -23,6 +23,7 @@ import CustomImageUploader from "@/components/ui/custom-image-uploader";
 import { Toaster } from "@/components/ui/toaster";
 import { FormSchema, FormValues } from "@/utils/formSchema";
 import { options } from "@/utils/options";
+import { ToastProvider } from "@/components/ui/toast";
 const urlPatterns: Record<string, string> = {
     x: "^https?:\\/\\/(www\\.)?twitter\\.com\\/[A-Za-z0-9_]{1,15}$",
     instagram: "^https?:\\/\\/(www\\.)?instagram\\.com\\/[A-Za-z0-9_.]+$",
@@ -175,34 +176,34 @@ const validateUrl=(url:string , pattern:string)=>{
   }
  }
 
- const customStyles ={
-  control:(provided :any ,state:any)=>({
-    ...provided ,
-    borderColor:state.isFocused ? "#000000":"#d1d5db",
-    boxShadow:state.isFocused ?"0 0 0 1px #d1d5db" : "none",
-    "&:hover":{
-      borderColor:"#d1d5db",
+ const customStyles = {
+  control: (provided: any, state: any) => ({
+    ...provided,
+    borderColor: state.isFocused ? "#000000" : "#d1d5db",
+    boxShadow: state.isFocused ? "0 0 0 1px #d1d5db" : "none",
+    "&:hover": {
+      borderColor: "#d1d5db",
     },
-    borderRadius:"0.375rem",
-    paddingTop:"0.2rem",
-    paddingBottom:"0.2rem",
+    borderRadius: "0.375rem",
+    paddingTop: "0.2rem",
+    paddingBottom: "0.2rem",
   }),
-  multiValue:(provided:any)=>({
-    ...provided ,
-    backgroundColor:"#e5e7eb"
+  multiValue: (provided: any) => ({
+    ...provided,
+    backgroundColor: "#e5e7eb",
   }),
-  multiValueLabel:(provided:any)=>({
-    ...provided ,
-    color:"#374151",
+  multiValueLabel: (provided: any) => ({
+    ...provided,
+    color: "#374151",
   }),
-  multiValueRemove:(Provided:any)=>({
-    ...Provided,
-    color:"#6b7280",
-    "&:hover":{
-      color:"#4b5563",
+  multiValueRemove: (provided: any) => ({
+    ...provided,
+    color: "#6b7280",
+    "&:hover": {
+      color: "#4b5563",
     },
   }),
- };
+};
 
  //Image Upload & changes
  const handleImagesChange=async(files :File[])=>{
@@ -308,6 +309,114 @@ try {
     setLoading(false);
   }
 };
+
+  return (
+    <div className="flex flex-col md:flex-row items-center md:items-start justify-between space-y-4 md:space-y-0 md:space-x-10 pt-20 pb-20 px-4 md:px-16">
+      <div>
+        <div className=" md:text-4xl text-xl font-medium w-3/3 pb-3">
+        Creating a DID is a breeze with  { " "}
+           <span className="text-black font-mono ">Meta</span>
+           <span className=" text-purple-500 font-mono">Link</span>
+        </div>
+         |<Toaster/>
+         <UserProfileDisplay formData={formData} countryCode={countryCode}/>
+      </div>
+
+      <Form {...form}>
+        <div className="w-full md:w-2/3">
+        {!submitted ? (
+          <form onSubmit={onSubmit}
+          className="space-y-4 w-full"
+          >  
+          {/* user basic Info component */}
+          <FormFields
+           formData={formData}
+           handleChange={handleChange}
+           errors={errors}
+          />
+          {/* Selecting skills */}
+          <FormItem className="items-center justify-center mb-4 w-full">
+            <FormLabel className="tex-sm">
+              Select Skills *
+
+             </FormLabel>
+             <FormControl>
+              {/* React-Select  */}
+             <Select
+             components={animatedComponents}
+             isMulti
+             value={selectedOptions}
+             onChange={handleSkillChange}
+             options={options}
+             className="text-md"
+             styles={customStyles}
+             classNamePrefix="react-select"
+
+             />
+
+           
+             </FormControl>
+          </FormItem>
+
+          {/* Image Upload component */}
+          <CustomImageUploader onImagesChange={handleImagesChange} />
+          {/* Social Handles */}
+            <SocialMediaInputs
+             formData={formData}
+             handleChange={handleChange}
+             errors={errors}
+            />
+            {/*About you section */}
+            <FormItem className="items-center justify-center w-full">
+                <FormLabel className="w-60 text-sm">About you?</FormLabel>
+                <FormControl>
+                  <textarea
+                    style={{ height: "100px" }}
+                    onChange={(e) => handleChange("info", e.target.value)}
+                    value={formData.info}
+                    className="form-textarea border p-2 border-gray-300 focus:outline-black rounded-md mt-1 block w-full"
+                  />
+                </FormControl>
+              </FormItem>
+              <div className="flex items-center gap-4">
+                <Button
+                  type="submit"
+                  className="text-sm font-light"
+                  disabled={loading}
+                >
+                  Submit
+                </Button>
+              </div>
+
+          </form>
+        ):( <div
+          className="
+            text-xl 
+            md:text-2xl 
+            flex 
+            items-center
+            justify-center
+            flex-col
+            px-8
+          "
+        >
+          <div className="w-80">
+            <img
+              src="/assets/MeditatingDoodle.svg"
+              alt="logo"
+              className="mx-auto"
+            />
+            <div className="text-gray-500 font-light text-center justify-center mx-auto py-10">
+              We&apos;ve received your inquiry and will be contacting you
+              via email shortly.
+            </div>
+          </div>
+        </div>)}</div>
+        </Form>
+
+    </div>
+  )
+
 
 
 }

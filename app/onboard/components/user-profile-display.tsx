@@ -1,12 +1,15 @@
 
 import React from 'react'
 
-type Props = {}
-
-const UserProfileDisplay= (props: Props) => {
-  return (
-    <div>user-profile-display</div>
-  )
+interface UserProfileDisplayProps {
+  formData:any ;
+  countryCode:string ;
 }
+
+const UserProfileDisplay:React.FC<UserProfileDisplayProps> =({formData  , countryCode}) => (
+ 
+    <div>user-profile-display</div>
+  
+)
 
 export default  UserProfileDisplay;

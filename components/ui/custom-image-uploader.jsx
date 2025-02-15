@@ -31,7 +31,7 @@ const CustomImageUploader = ({ onImagesChange }) => {
 		});
 	};
 
-	const { getRootProps, getInputprops, isDragActive } = useDropzone({
+	const { getRootProps, getInputProps, isDragActive } = useDropzone({
 		onDrop,
 		accept: "image/",
 		multiple: false,
@@ -48,7 +48,7 @@ const CustomImageUploader = ({ onImagesChange }) => {
 				className={`border-2 border-dashed rounded-lg flex flex-row items-center justify-center w-full p-6 text-center ${
 					isDragActive ? "bg-purple-100" : "bg-white"
 				}`}>
-				<input {...getInputprops()} />
+				<input {...getInputProps()} />
 				{isDragActive ? (
 					<p>Drop the files here ...</p>
 				) : (
