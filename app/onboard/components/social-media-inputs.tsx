@@ -35,7 +35,7 @@ const socialMediaInputs:React.FC<SocialMediaInputsProps>=({
     </FormItem>
     <FormItem className="items-center justify-center w-full">
         <FormLabel className="text-sm">
-            {errors?.instaram && <p className="text-red-500 text-xs  mt-1">
+            {errors?.instagram && <p className="text-red-500 text-xs  mt-1">
                 {
                     errors?.instagram
                 }

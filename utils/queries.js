@@ -31,7 +31,7 @@ export async function createUser(
 			socialLinks,
 			visibility
 		);
-		const receipt = await transactionResponse.await();
+		const receipt = await transactionResponse.wait();
 		return receipt;
 	} catch (error) {
 		console.error("Error in createUser", error);

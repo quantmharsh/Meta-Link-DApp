@@ -25,13 +25,13 @@ import { FormSchema, FormValues } from "@/utils/formSchema";
 import { options } from "@/utils/options";
 import { ToastProvider } from "@/components/ui/toast";
 const urlPatterns: Record<string, string> = {
-    x: "^https?:\\/\\/(www\\.)?twitter\\.com\\/[A-Za-z0-9_]{1,15}$",
-    instagram: "^https?:\\/\\/(www\\.)?instagram\\.com\\/[A-Za-z0-9_.]+$",
-    linkedin: "^https?:\\/\\/(www\\.)?linkedin\\.com\\/in\\/[A-Za-z0-9_-]+$",
-    github: "^https?:\\/\\/(www\\.)?github\\.com\\/[A-Za-z0-9_-]+$",
-    discord:
-      "^https?:\\/\\/(www\\.)?discord\\.com\\/users\\/\\d{17,19}$",
-  };
+  x: "^https?:\\/\\/(www\\.)?(x\\.com|twitter\\.com)\\/([A-Za-z0-9_\\.]{1,25})$", 
+  instagram: "^https?:\\/\\/(www\\.)?instagram\\.com\\/([A-Za-z0-9_.]+)\\/?$",
+  linkedin: "^https?:\\/\\/(www\\.)?linkedin\\.com\\/(in|company|pub)\\/([A-Za-z0-9_-]+)\\/?$",
+  github: "^https?:\\/\\/(www\\.)?github\\.com\\/([A-Za-z0-9_-]+)\\/?$",
+   discord: "^https?:\\/\\/(www\\.)?discord\\.com\\/(users|invite|channels)\\/([0-9]+)\\/?$"
+};
+
   
   const animatedComponents=makeAnimated();
 export default function CreateProfile()  {
@@ -122,15 +122,11 @@ const form =useForm({
   defaultValues:formData ,
 });
 
-//validate URL's
-const validateUrl=(url:string , pattern:string)=>{
-  if(!url)
-  {
-    return false;
-  }
-  const regex=new RegExp(pattern);
-  return  regex.test(url);
-}
+const validateUrl = (url: string, pattern: string): boolean => {
+  if (!url) return false;
+  return new RegExp(pattern).test(url);
+};
+
 
 
  // update form fields
@@ -171,7 +167,7 @@ const validateUrl=(url:string , pattern:string)=>{
   if(selected.length <=3)
   {
     const selectedValues=selected.map((option:any)=> option.value);
-    setSelectedOptions(selectedValues);
+    setSelectedOptions(selected);
     handleChange("skills",selectedValues);
   }
  }
