@@ -1,13 +1,18 @@
 import React from "react";
 import {
+  IconBrandDiscord,
+  IconBrandGithub,
   IconBrandInstagram,
   IconBrandLinkedin,
   IconBrandTiktok,
   IconBrandX,
   IconBrandYoutube,
   IconBriefcase,
+  IconBriefcase2,
   IconMail,
+  IconMailBitcoin,
   IconMapPin,
+  IconMapPin2,
   IconPhone,
 } from "@tabler/icons-react";
 import Link from "next/link";
@@ -18,7 +23,7 @@ interface UserProfileDisplayProps {
 
 const UserProfileDisplay:React.FC<UserProfileDisplayProps> =({formData  , countryCode}) => (
  
-    <div className="  group relative border-gray-800 dark:border-gray-800 bg-gray-800 border-[14px] rounded-[2.5rem] h-[600px] w-[300px]  hover:outline hover:outline-[4px] hover:outline-purple-500
+    <div className="   group relative border-gray-800 dark:border-gray-800 bg-gray-800 border-[14px] rounded-[2.5rem] h-[600px] w-[300px]  hover:outline hover:outline-[4px] hover:outline-purple-500
 
      "> 
   <div className="h-[32px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute  -left-[17px] top-[74px] rounded-s-lg hover:outline hover:outline-[4px] hover:outline-purple-500 "></div>
@@ -34,8 +39,104 @@ const UserProfileDisplay:React.FC<UserProfileDisplayProps> =({formData  , countr
         src={formData.imageUrl || "/images/avatar.jpeg"}
         alt="Bordered Avatar"
         />
+        <p className="font-medium text-gray-700 py-2">
+          @{`${formData.username}`  ||"MetaLinkDID"}
+
+        </p>
+        <p className=" tex-sm text-gray-700 py-1">
+          {formData.info || "We make digital Identity easier 🚀"}
+
+        </p>
 
       </div>
+      {/* job title , country code */}
+      <div className="grid grid-cols-2 gap-2 py-2 w-full">
+        <div className="flex flex-row items-center space-x-2  bg-gray-100 px-3 py-2 rounded-lg">
+          <IconBriefcase2 width={17} height={17}/>
+          <p className="text-sm">{formData.job_title || "Company"}</p>
+        </div>
+        <div className="flex flex-row items-center space-x-2 bg-gray-100  px-3 py-2 rounded-lg">
+          <IconMapPin2 width={17} height={17}/>
+          <p className="text-sm">{countryCode}</p>
+        </div>
+
+      </div>
+
+      {/* Email & phone */}
+      <div className="flex flex-col w-full">
+        {/* Email */}
+        <div className="flex flex-row items-center bg-gray-100 space-x-2 px-3 py-2 rounded-lg">
+          <IconMailBitcoin width={17} height={17}/>
+          <p className="text-sm">
+            {formData.email || "MetaLink@crypto.com"}
+          </p>
+        </div>
+        {/* Phone */}
+        <div className="flex flex-row items-center bg-gray-100 mt-2 space-x-2 px-3 py-2 rounded-lg">
+            <IconPhone width={17} height={17} />
+            <p className="text-sm">
+              {formData.phone_number || "+00 123 456 789"}
+            </p>
+          </div>
+      </div>
+      <div className="inline-flex items-center  justify-center w-full">
+        <hr className="w-64 h-px my-4 bg-gray-200 border-0 dark:bg-gray-700"/>
+        <span className="absolute px-3 font-medium text-gray-900 -translate-x-1/2  left-1/2 dark:text-white dark:bg-gray-900">Skills</span>
+      </div>
+      {/* Skills */}
+      <div className="grid grid-cols-2 gap-2 w-full">
+        {formData?.skills?.map((skill:string , index:number)=>(
+          <div
+          key={index}
+          className="flex flex-row items-center bg-gray-100 w-max space-x-2 px-3 py-2 rounded-lg"
+          >
+            <p className="tex-xs">{skill}</p>
+            
+            </div>
+        ))}
+
+      </div>
+      <div className="inline-flex items-center justify-center w-full">
+        <hr className="w-64 h-px my-4 bg-gray-200  border-0 dark:bg-gray-700"/>
+        <span className="absolute px-3 font-medium text-gray-900 -translate-x-1/2 left-1/2 dark:text-white dark:bg-gray-900">Socials</span>
+      </div>
+      <div className="grid grid-cols-4 gap-2 pt-2 w-full">
+          {formData.x && (
+            <Link href={formData.x}>
+              <div className="flex flex-row w-11 h-11 cursor-pointer items-center bg-black p-3 rounded-full">
+                <IconBrandX width={24} height={24} color="white" />
+              </div>
+            </Link>
+          )}
+          {formData.instagram && (
+            <Link href={formData.instagram}>
+              <div className="flex flex-row w-11 h-11 cursor-pointer items-center bg-black p-3 rounded-full">
+                <IconBrandInstagram width={24} height={24} color="white" />
+              </div>
+            </Link>
+          )}
+          {formData.github && (
+            <Link href={formData.github}>
+              <div className="flex flex-row w-11 h-11 cursor-pointer items-center bg-black p-3 rounded-full">
+                <IconBrandGithub width={24} height={24} color="white" />
+              </div>
+            </Link>
+          )}
+          {formData.discord && (
+            <Link href={formData.discord}>
+              <div className="flex flex-row w-11 h-11 cursor-pointer items-center bg-black p-3 rounded-full">
+                <IconBrandDiscord width={24} height={24} color="white" />
+              </div>
+            </Link>
+          )}
+          {formData.linkedin && (
+            <Link href={formData.linkedin}>
+              <div className="flex flex-row w-11 h-11 cursor-pointer items-center bg-black p-3 rounded-full">
+                <IconBrandLinkedin width={24} height={24} color="white" />
+              </div>
+            </Link>
+          )}
+        </div>
       </div>
       </div>
 

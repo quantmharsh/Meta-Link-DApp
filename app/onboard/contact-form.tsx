@@ -307,14 +307,14 @@ try {
 };
 
   return (
-    <div className="flex flex-col md:flex-row items-center md:items-start justify-between space-y-4 md:space-y-0 md:space-x-10 pt-20 pb-20 px-4 md:px-16">
+    <div className="flex flex-col md:flex-row items-center md:items-start justify-between space-y-4 md:space-y-0 md:space-x-10 pt-3 pb-20 px-4 md:px-16">
       <div>
         <div className=" md:text-4xl text-xl font-medium w-3/3 pb-3">
         Creating a DID is a breeze with  { " "}
            <span className="text-black font-mono ">Meta</span>
            <span className=" text-purple-500 font-mono">Link</span>
         </div>
-         |<Toaster/>
+         <Toaster/>
          <UserProfileDisplay formData={formData} countryCode={countryCode}/>
       </div>
 
