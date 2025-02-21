@@ -112,6 +112,7 @@ export async function getUserByAddress(userAddress) {
 	try {
 		const contractObj = await contract();
 		const user = await contractObj.getUserByAddress(userAddress);
+		console.log("Got user", user);
 		return {
 			basicInfo: {
 				firstName: user.basicInfo.firstName,

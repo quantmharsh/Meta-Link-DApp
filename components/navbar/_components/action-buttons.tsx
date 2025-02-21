@@ -30,7 +30,7 @@ const ActionButtons = () => {
 		getUserInfo();
 	}, [ready, authenticated]);
 
-	console.log(UserInfo == "User does not exist .");
+	console.log(UserInfo == "invalid address or ENS name");
 	console.log(UserInfo);
 	console.log(authenticated);
 
@@ -38,7 +38,7 @@ const ActionButtons = () => {
 		<div className="pr-2">
 			<div className="items-center justiify-center  flex">
 				<div className="flex xl:space-x-4">
-					{authenticated && UserInfo !== "User does not exist ." ? (
+					{authenticated && UserInfo !== "invalid address or ENS name" ? (
 						<>
 							<Link
 								href={"/dashboard"}
@@ -49,7 +49,7 @@ const ActionButtons = () => {
 								|
 							</div>
 						</>
-					) : authenticated && UserInfo == "User does not exist ." ? (
+					) : authenticated && UserInfo == "invalid address or ENS name" ? (
 						<>
 							<Link href={"/onboard"} className="lg:flex items-center hidden ">
 								<div className="">Get DID</div>

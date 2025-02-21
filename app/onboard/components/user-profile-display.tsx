@@ -26,8 +26,10 @@ const UserProfileDisplay:React.FC<UserProfileDisplayProps> =({formData  , countr
     <div className="   group relative border-gray-800 dark:border-gray-800 bg-gray-800 border-[14px] rounded-[2.5rem] h-[600px] w-[300px]  hover:outline hover:outline-[4px] hover:outline-purple-500
 
      "> 
-  <div className="h-[32px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute  -left-[17px] top-[74px] rounded-s-lg hover:outline hover:outline-[4px] hover:outline-purple-500 "></div>
-    <div className="h-[46px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -left-[17px] top-[124px] rounded-s-lg hover:outline hover:outline-[4px] hover:outline-purple-500 "></div>
+  <div className="h-[32px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute  -left-[17px] top-[74px] rounded-s-lg 
+ 
+  "></div>
+    <div className="h-[46px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -left-[17px] top-[124px] rounded-s-lg "></div>
     <div className="h-[46px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -left-[17px] top-[178px] rounded-s-lg "></div>
     <div className="h-[64px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -right-[17px] top-[142px] rounded-e-lg "></div>
     <div className="rounded-[2rem]    overflow-hidden w-[272px] h-[572px] bg-neutral-200 dark:bg-gray-800">
@@ -110,8 +112,11 @@ const UserProfileDisplay:React.FC<UserProfileDisplayProps> =({formData  , countr
           )}
           {formData.instagram && (
             <Link href={formData.instagram}>
-              <div className="flex flex-row w-11 h-11 cursor-pointer items-center bg-black p-3 rounded-full">
-                <IconBrandInstagram width={24} height={24} color="white" />
+              <div className="flex flex-row w-11 h-11 cursor-pointer items-center bg-black p-3 rounded-full
+               hover:animate-fifth
+              ">
+               
+                <IconBrandInstagram width={24} height={24} color="white" className="hover:w-13 hover:h-13" />
               </div>
             </Link>
           )}
