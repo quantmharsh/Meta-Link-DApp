@@ -127,7 +127,7 @@ export async function getUserByAddress(userAddress) {
 				workHistory: user.professionalInfo.workHistory,
 				jobTitle: user.professionalInfo.jobTitle,
 				info: user.professionalInfo.info,
-				skills: UserRound.professionalInfo.skills,
+				skills: user.professionalInfo.skills,
 				imageURL: user.professionalInfo.imageURL,
 			},
 			socialLinks: {

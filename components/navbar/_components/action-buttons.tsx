@@ -22,6 +22,15 @@ const ActionButtons = () => {
 
 	useEffect(() => {
 		const getUserInfo = async () => {
+			
+				if (!ready || !wallets[0]?.address) {
+					console.log("Wallet is not ready or address is undefined.");
+					console.log("Wallet address =",wallets[0]?.address);
+					return;
+				}
+			
+				
+			
 			let userInfo = (await getUserByAddress(
 				ready ? wallets[0]?.address : "0x0"
 			)) as any;

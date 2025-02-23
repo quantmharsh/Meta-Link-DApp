@@ -50,8 +50,8 @@ const Section=()=>{
 const getUserInfo=async()=>{
 try {
      console.log("wallets address" , wallets[0]?.address);
-    let userInfo=(await getUserByAddress(wallets[0]?.address) as any);
-    let username=(await getUsernameByAddress(wallets[0]?.address)as any);
+    let userInfo=(await getUserByAddress(ready ?wallets[0]?.address:"0x0") as any);
+    let username=(await getUsernameByAddress(ready ? wallets[0]?.address:"0x0")as any);
     setFormData({
         first_name:userInfo?.basicInfo?.firstName ,
   last_name:userInfo?.basicInfo?.lastName,
