@@ -16,7 +16,7 @@ import {
 import { useWallets } from "@privy-io/react-auth";
 
 import UserProfileDisplay from "./components/user-profile-display";
-import SocialMediaInputs from "./components/social-media-inputs";
+
 import FormFields from "./components/form-fields";
 import CustomImageUploader from "@/components/ui/custom-image-uploader";
 
@@ -24,6 +24,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { FormSchema, FormValues } from "@/utils/formSchema";
 import { options } from "@/utils/options";
 import { ToastProvider } from "@/components/ui/toast";
+import SocialMediaInputs from "./components/social-media-inputs";
 const urlPatterns: Record<string, string> = {
   x: "^https?:\\/\\/(www\\.)?(x\\.com|twitter\\.com)\\/([A-Za-z0-9_\\.]{1,25})$", 
   instagram: "^https?:\\/\\/(www\\.)?instagram\\.com\\/([A-Za-z0-9_.]+)\\/?$",

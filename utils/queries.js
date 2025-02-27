@@ -45,18 +45,26 @@ export async function editUser(
 	basicInfo,
 	professionalInfo,
 	socialLinks,
-	visisbility
+	visibility
 ) {
 	try {
+		if (!username || typeof username !== "string") {
+			console.log("Invalid Username or no username found" , username);
+            throw new Error("Invalid username: " + username);
+        }   console.log("SocialLinks  in  Edit User " ,socialLinks);
+        if (!basicInfo || !professionalInfo || !socialLinks ) {
+			console.log("One or more required parameters are missing ", basicInfo , professionalInfo , socialLinks );
+            throw new Error("One or more required parameters are missing.");
+        }
 		const contractObj = await contract();
 		const transactionResponse = await contractObj.editUser(
 			username,
 			basicInfo,
 			professionalInfo,
 			socialLinks,
-			visisbility
+			visibility
 		);
-		const receipt = await transactionResponse.await();
+		const receipt = await transactionResponse.wait();
 		return receipt;
 	} catch (error) {
 		console.error("Error in editUser", error);

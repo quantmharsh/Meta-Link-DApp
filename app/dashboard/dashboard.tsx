@@ -4,6 +4,7 @@ import { MotionConfig, useScroll } from "framer-motion";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Profile from "./components/profile";
+import EditProfile from "./components/edit-profile";
 export default function ContactForm(){
     
     const tabs=[
@@ -12,7 +13,7 @@ export default function ContactForm(){
             component: <Profile/>
         },
         {name:"Edit Profile",
-         component:<p>Edit Profile Component</p>
+         component:<EditProfile/>
         },
     ];
 

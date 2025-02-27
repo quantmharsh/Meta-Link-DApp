@@ -7,7 +7,7 @@ interface SocialMediaInputsProps {
     handleChange:(name:string , value:any)=>void;
     errors:any;
 }
-const socialMediaInputs:React.FC<SocialMediaInputsProps>=({
+const SocialMediaInputs:React.FC<SocialMediaInputsProps>=({
     formData,
     handleChange , errors
 })=>(
@@ -104,4 +104,4 @@ const socialMediaInputs:React.FC<SocialMediaInputsProps>=({
     </>
 
 );
-export default socialMediaInputs;
+export default SocialMediaInputs;

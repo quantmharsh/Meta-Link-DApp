@@ -124,6 +124,7 @@ contract MetaLink {
       user.jobTitle=professionalInfo.jobTitle;
       user.x=socialLinks.x;
       user.instagram=socialLinks.instagram;
+      
       user.discord=socialLinks.discord;
       user.github=socialLinks.github;
       user.linkedin=socialLinks.linkedin;
