@@ -56,6 +56,7 @@ export async function editUser(
 			console.log("One or more required parameters are missing ", basicInfo , professionalInfo , socialLinks );
             throw new Error("One or more required parameters are missing.");
         }
+		console.log("SociaLinks in Edit user ", socialLinks);
 		const contractObj = await contract();
 		const transactionResponse = await contractObj.editUser(
 			username,
@@ -65,6 +66,7 @@ export async function editUser(
 			visibility
 		);
 		const receipt = await transactionResponse.wait();
+		console.log("RECEIPT" ,receipt);
 		return receipt;
 	} catch (error) {
 		console.error("Error in editUser", error);

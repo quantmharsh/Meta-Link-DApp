@@ -161,6 +161,14 @@ contract MetaLink {
         user.skills ,
         user.imageURL
       );
+      socialLinks=SocialLinks(
+        user.github,
+        user.discord,
+        user.instagram,
+        user.linkedin,
+        user.x 
+
+      );
       visibility=user.visibility;
       return ( basicInfo , professionalInfo , socialLinks ,visibility );
    }

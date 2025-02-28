@@ -292,6 +292,8 @@ try {
       socialLinks,
       visibility
     );
+    console.log("SocialLinks after  Edit User " ,socialLinks);
+    
     console.log("User updated :", receipt);
     toast({
       title: "",
