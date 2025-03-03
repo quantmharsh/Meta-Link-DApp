@@ -2,6 +2,7 @@
 
 import Footer from "@/components/footer"
 import Navbar from "@/components/navbar/navbar"
+import UserProfile from "./user-profile"
 
 const Profile =({params}:{params:{
     id:any
@@ -10,6 +11,7 @@ const Profile =({params}:{params:{
     return(
         <div>
             <Navbar/>
+            <UserProfile param={params.id}/>
             <Footer/>
         </div>
     )

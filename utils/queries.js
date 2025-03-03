@@ -78,6 +78,7 @@ export async function editUser(
 export async function getUserByUsername(username) {
 	try {
 		const contractObj = await contract();
+		
 		const user = await contractObj.getUserByUsername(username);
 		return {
 			basicInfo: {

@@ -94,7 +94,7 @@ const SocialMediaInputs:React.FC<SocialMediaInputsProps>=({
   </FormLabel>
   <FormControl>
     <Input
-      placeholder="https://discord.com/users/youruserid"
+      placeholder="https://discord.com/users/532855998390599681"
       onChange={(e) => handleChange("discord", e.target.value)}
       value={formData.discord}
     />

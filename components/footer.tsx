@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { PiInstagramLogoDuotone } from "react-icons/pi"
+import { PiDiscordLogoDuotone, PiGithubLogoDuotone, PiInstagramLogoDuotone, PiLinkedinLogoDuotone } from "react-icons/pi"
 
 const Footer=()=>{
 
@@ -19,10 +19,48 @@ const Footer=()=>{
     >
       <PiInstagramLogoDuotone className="text-2xl text-gray-500 hover:text-pink-500 transition-all duration-300" />
     </a>
+    <a
+      href="https://www.linkedin.com/in/harsh-srivastava2001/"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <PiLinkedinLogoDuotone className="text-2xl text-gray-500 hover:text-pink-500 transition-all duration-300" />
+    </a><a
+      href="https://github.com/quantmharsh"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <PiGithubLogoDuotone className="text-2xl text-gray-500 hover:text-pink-500 transition-all duration-300" />
+    </a>
+    <a
+      href="https://discord.com/users/532855998390599681"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <PiDiscordLogoDuotone className="text-2xl text-gray-500 hover:text-pink-500 transition-all duration-300" />
+    </a>
 
                     </div>
                 </div>
+                <div className="flex-col space-y-6 ">
+          <div className="pt-10 font-medium">PRODUCT</div>
+          <div className="font-light space-y-4 text-sm">
+            <div>Home</div>
+            <div>Jobs</div>
+            <div>Verify Identity</div>
+          </div>
+        </div>
 
+        <div className="flex-col space-y-6 flex ">
+          <div className="pt-10 font-medium">USE CASES</div>
+          <div className="font-light space-y-4 text-sm">
+            <div>Secure Digital Identity</div>
+            <div>Manage Your Profile</div>
+            <div>Authenticate with Ease </div>
+
+            <div>Verify Credentials</div>
+          </div>
+        </div>
             </div>
         </div>
     )
