@@ -78,8 +78,9 @@ export async function editUser(
 export async function getUserByUsername(username) {
 	try {
 		const contractObj = await contract();
-		
+		console.log("Inside GetUserByUsername , queries" );
 		const user = await contractObj.getUserByUsername(username);
+		console.log("User here" , user);
 		return {
 			basicInfo: {
 				firstName: user.basicInfo.firstName,
@@ -94,7 +95,7 @@ export async function getUserByUsername(username) {
 				workHistory: user.professionalInfo.workHistory,
 				jobTitle: user.professionalInfo.jobTitle,
 				info: user.professionalInfo.info,
-				skills: UserRound.professionalInfo.skills,
+				skills:user.professionalInfo.skills,
 				imageURL: user.professionalInfo.imageURL,
 			},
 			socialLinks: {
