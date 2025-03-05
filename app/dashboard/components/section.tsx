@@ -61,7 +61,7 @@ try {
   username:username ,
   email:userInfo?.basicInfo?.email,
   home_address:userInfo?.basicInfo?.homeAddress,
-  date_of_birth:userInfo?.basicInfo?.date_of_birth,
+  date_of_birth:userInfo?.basicInfo?.dateOfBirth,
         education: userInfo?.professionalInfo?.education,
         work_history: userInfo?.professionalInfo?.workHistory,
         phone_number: userInfo?.basicInfo?.phoneNumber,
