@@ -228,4 +228,4 @@ export async function getVisibility(username) {
 		console.error("Error in getVisibility:", e);
 		return parseErrorMsg(e);
 	}
-}
+}    

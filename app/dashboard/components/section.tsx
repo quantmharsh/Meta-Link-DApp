@@ -55,6 +55,7 @@ try {
      console.log("wallets address" , wallets[0]?.address);
     let userInfo=(await getUserByAddress(ready ?wallets[0]?.address:"0x0") as any);
     let username=(await getUsernameByAddress(ready ? wallets[0]?.address:"0x0")as any);
+    console.log("Checking social links structure:", userInfo?.socialLinks);
     setFormData({
         first_name:userInfo?.basicInfo?.firstName ,
   last_name:userInfo?.basicInfo?.lastName,
@@ -117,14 +118,23 @@ getUserInfo();
                                 <p className="font-bold text-lg text-gray-700 py-2">
                   @{`${formData.username}` || `UserNotFound`}
                 </p>
-                <p className="text-sm text-gray-700 py-1">
-                  {formData.info || "We making digital Identity easier..."}
-                </p>
-                <div className=" bg-white rounded-lg p-3 space-y-2">
-                  <div className="flex flex-row items-center space-x-2   rounded-lg">
+            
+                <div className=" bg-white rounded-lg p-8 space-y-2">
+                  <div className="flex flex-row items-center space-x-2  justify-center  rounded-lg">
                     <IconUserBitcoin width={18} height={18} />
-                    <p className="text-sm">General Information</p>
+                    <p className="text-sm">General Information
+                   
+                      
+                    </p>
+                    
+                  
                   </div>
+                  <p className="text-sm font-semibold ">
+                        {formData.first_name ||
+                          "FirstName"}   {formData.last_name ||
+                            "FirstName"}
+                      </p>
+                  
                   <p className="text-sm font-semibold text-gray-700">
                     About me
                   </p>

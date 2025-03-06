@@ -55,6 +55,7 @@ try {
     console.log("params.param" , params.param );
     let userInfo=(await getUserByUsername(params.param)) as any ;
     console.log("UserInfo  ", userInfo);
+    console.log("Checking social links structure:", userInfo?.socialLinks);
     setFormData({
         first_name:userInfo?.basicInfo?.firstName ,
   last_name:userInfo?.basicInfo?.lastName,

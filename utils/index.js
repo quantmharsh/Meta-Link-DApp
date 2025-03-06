@@ -22,7 +22,7 @@ export const contract=async()=>{
     console.log("Got Ethereum ");
     const signer= await provider.getSigner();
     console.log("Signer" , signer);
-    const contractReader=new ethers.Contract("0x85B8F6cF7Af57bC2A5750507484ea00dFd5DbA3e",
+    const contractReader=new ethers.Contract("0x861A62f8371bf450d88d3a7b686450dAbB4Bfc2D",
         MetaLink.abi,
         signer
     );

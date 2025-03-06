@@ -32,11 +32,11 @@ export const FormSchema = z.object({
     .url()
     .regex(/^https?:\/\/(www\.)?github\.com\/[A-Za-z0-9_-]+$/, "Invalid GitHub URL")
     .optional(),
-  discord: z
+    discord: z
     .string()
     .url()
-    .regex(/^https?:\/\/(www\.)?discord\.com\/users\/\d{17,19}$/, "Invalid Discord URL")
-    .optional(),
+    .regex(/^https?:\/\/(www\.)?discord\.com\/users\/\d{17,19}\/?$/, "Invalid Discord URL")
+    .optional(),  
   info: z.string(),
   skills: z.any(),
 });

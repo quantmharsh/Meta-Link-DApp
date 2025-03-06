@@ -162,11 +162,13 @@ contract MetaLink {
         user.imageURL
       );
       socialLinks=SocialLinks(
-        user.github,
-        user.discord,
+        
+        user.x,
         user.instagram,
-        user.linkedin,
-        user.x 
+        user.discord,
+        user.github,
+        user.linkedin
+       
 
       );
       visibility=user.visibility;
