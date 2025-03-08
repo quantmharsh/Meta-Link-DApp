@@ -8,6 +8,7 @@ import { IconBrandDiscord, IconBrandGithubCopilot, IconBrandInstagram, IconBrand
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 
 const Section=()=>{
     const[formData , setFormData]=useState<any>({
@@ -96,6 +97,7 @@ getUserInfo();
 
 
     return(
+     
         <div className="md:items-center items-center flex flex-col w-full">
             <div className="flex flex-col items-center">
                 <div className="id-card-tag">

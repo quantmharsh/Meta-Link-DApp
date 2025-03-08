@@ -220,3 +220,8 @@ contract MetaLink {
 }
 // Deployed address :  0xb965121E106167DAa47B4a1CE40dc59882905f59
 //deployed smart contract using hardhat on BitTorent test network 
+//whenever updating smart contract
+//remove all deployment  , artifacts and other folders
+//then  compile using npx run compile
+//get deployment script from  hardhat  docs. 
+//be carefull with       network  
