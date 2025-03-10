@@ -9,10 +9,13 @@ import {
 } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PiArrowRight } from "react-icons/pi";
 import {useMediaQuery} from "react-responsive";
 import {motion} from "framer-motion";
+import { usePrivy, useWallets } from "@privy-io/react-auth";
+import { getUserByAddress } from "@/utils/queries";
+
 
 const tabs = [
 	{
@@ -74,6 +77,33 @@ const HeroSection =()=>{
     const ref=useRef(null);
     const[activeTab  , setActiveTab]=useState(tabs[0]);
     const isSmallScreen= useMediaQuery({maxWidth:767});
+    const { ready, authenticated, login, logout } = usePrivy();
+	const disabledLogin = !ready || (ready && authenticated);
+	const { wallets } = useWallets();
+  const [UserInfo, setUserInfo] = useState("");
+    useEffect(() => {
+        const getUserInfo = async () => {
+          
+            if (!ready || !wallets[0]?.address) {
+              console.log("Wallet is not ready or address is undefined.");
+              console.log("Wallet address =",wallets[0]?.address);
+              return;
+            }
+          
+            
+          
+          let userInfo = (await getUserByAddress(
+            ready ? wallets[0]?.address : "0x0"
+          )) as any;
+          setUserInfo(userInfo);
+        };
+        getUserInfo();
+      }, [ready, authenticated]);
+    
+      console.log(UserInfo == "user does not exist with this username");
+      console.log(UserInfo);
+      console.log(authenticated);
+    
 
     return(
 
@@ -96,14 +126,24 @@ const HeroSection =()=>{
           
       <div className="flex gap-4 pt-6 items-center justify-center">
         <Link href="/">
-          <Button className="py-1 ">
+          
             <div className="flex items-center justify-center">
-              <div className="text-lg">Create Identity</div>
+            {authenticated && UserInfo !== "user does not exist with this username" ? (<Link
+								href={"/dashboard"}
+								className="text-lg ">
+								<div>
+                  <Button className="py-1">Create Identity</Button></div>
+							</Link>): authenticated && UserInfo == "user does not exist with this username"  ?(<Link
+								href={"/onboard"}
+								className="text-lg">
+								<div><Button className="py-1">Create Identity </Button></div>
+							</Link>):('') }
+             
               <div>
                 <PiArrowRight className="ml-2 " />
               </div>
             </div>
-          </Button>
+         
         </Link>
       </div>
       <div className="pt-10 xl:pt-20 items-center justify-center">
