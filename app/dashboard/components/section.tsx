@@ -121,7 +121,11 @@ getUserInfo();
                                 src={formData.imageUrl || "/images/avatar.jpeg"}
                                 alt="user profile pic"/>)}
                                 <p className="font-bold text-lg text-gray-700 py-2">
-                  @{`${formData.username}` || `UserNotFound`}
+                                {loading ? (
+                                        <span className="bg-gray-200 h-5 w-24 rounded animate-pulse"></span>
+                                    ) : (
+                                        `@${formData.username || "UserNotFound"}`
+                                    )}
                 </p>
             
                 <div className=" bg-white rounded-lg p-8 space-y-2">
@@ -135,16 +139,24 @@ getUserInfo();
                   
                   </div>
                   <p className="text-sm font-semibold ">
-                        {formData.first_name ||
-                          "FirstName"}   {formData.last_name ||
-                            "FirstName"}
+                  {loading ? (
+                                        <div className="bg-gray-200 h-4 w-48 rounded animate-pulse">
+                                        
+                                        </div>
+                                    ) : (
+                                        `${formData.first_name} ${formData.last_name}`
+                                    )}
                       </p>
                   
                   <p className="text-sm font-semibold text-gray-700">
                     About me
                   </p>
                   <p className="text-sm ">
-                    {formData.info || "We making digital Identity easier..."}
+                  {loading ? (
+                                        <div className="bg-gray-200 h-4 w-64 rounded animate-pulse"></div>
+                                    ) : (
+                                        formData.info || "We making digital Identity easier..."
+                                    )}
                   </p>
                   <div className="grid grid-cols-2 pt-3 gap-2">
                     <div className="py-2">
@@ -153,8 +165,12 @@ getUserInfo();
                         <p className="text-sm">Education</p>
                       </div>
                       <p className="text-xs font-semibold ">
-                        {formData.education ||
-                          "Thomas Jeff High School, Stanford University"}
+                      {loading ? (
+                                                    <div className="bg-gray-200 h-4 w-32 rounded animate-pulse"></div>
+                                                ) : (
+                                                    formData.education|| "N/A"
+                                                )}
+                       
                       </p>
                     </div>
                     <div className="py-2">
@@ -163,7 +179,12 @@ getUserInfo();
                         <p className="text-sm">Work History</p>
                       </div>
                       <p className="text-xs font-semibold ">
-                        {formData.work_history || "Twitch, Google, Apple"}
+                      {loading ? (
+                                                    <div className="bg-gray-200 h-4 w-32 rounded animate-pulse"></div>
+                                                ) : (
+                                                    formData.work_history|| "Twitch, Google, Apple"
+                                                )}
+                        {/* {formData.work_history || "Twitch, Google, Apple"} */}
                       </p>
                     </div>
                     <div className="py-2">
@@ -172,7 +193,12 @@ getUserInfo();
                         <p className="text-sm">Join Date</p>
                       </div>
                       <p className="text-xs font-semibold ">
-                        {formData.dateOfBirth || " 2024"}
+                      {loading ? (
+                                                    <div className="bg-gray-200 h-4 w-32 rounded animate-pulse"></div>
+                                                ) : (
+                                                    formData.dateOfBirth|| "2024"
+                                                )}
+                        {/* {formData.dateOfBirth || " 2024"} */}
                       </p>
                     </div>
 
@@ -182,7 +208,12 @@ getUserInfo();
                         <p className="text-sm">Birthday</p>
                       </div>
                       <p className="text-xs font-semibold ">
-                        {formData.date_of_birth || " 15-08-1990"}
+                      {loading ? (
+                                                    <div className="bg-gray-200 h-4 w-32 rounded animate-pulse"></div>
+                                                ) : (
+                                                    formData.date_of_birth|| "15-08-1990"
+                                                )}
+                        {/* {formData.date_of_birth || " 15-08-1990"} */}
                       </p>
                     </div>
                   </div>
@@ -194,11 +225,17 @@ getUserInfo();
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-2 w-full ">
-                {formData?.skills?.map((skill: any) => (
-                  <div className="flex flex-row items-center bg-white w-max  space-x-2  px-3 py-2 rounded-lg">
-                    <p className="text-xs">{skill}</p>
-                  </div>
-                ))}
+              {loading
+                                ? Array(3)
+                                      .fill(null)
+                                      .map((_, i) => (
+                                          <div key={i} className="bg-gray-200 h-6 w-20 rounded animate-pulse"></div>
+                                      ))
+                                : formData.skills.map((skill: any, i: number) => (
+                                      <div key={i} className="bg-white px-3 py-2 rounded-lg">
+                                          <p className="text-xs">{skill}</p>
+                                      </div>
+                                  ))}
               </div>
               <div className="flex flex-col w-full mt-2 ">
                 <div className=" pb-1 space-y-2">

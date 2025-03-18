@@ -10,6 +10,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 const UserProfile=(params:any)=>{
+  const[loading , setLoading]=useState(true);
     const[formData , setFormData]=useState<any>({
         first_name: "",
         last_name: "",
@@ -77,8 +78,10 @@ try {
         imageUrl: userInfo?.professionalInfo?.imageURL,
     })
     console.log("got user details" , userInfo);
+    setLoading(false);
     
 } catch (error) {
+  setLoading(false);
       toast({
         title:"Error",
         description:"User Doesn't exist",
@@ -96,148 +99,194 @@ getUserInfo();
 
 
     return(
-        <div className="md:items-center items-center flex flex-col w-full">
-            <div className="flex flex-col items-center">
-                <div className="id-card-tag">
+      <div className="md:items-center items-center flex flex-col w-full">
+      <div className="flex flex-col items-center">
+          <div className="id-card-tag">
 
-                </div>
-                <div className="id-card-tag-strip"></div>
-        <div className="id-card-hook"></div>
+          </div>
+          <div className="id-card-tag-strip"></div>
+  <div className="id-card-hook"></div>
 
 
+      </div>
+      <Toaster/>
+      <div className="md:items-center items-center justify-center flex flex-col w-11/12 md:w-7/12">
+          <div className="flex flex-row items-start">
+              <div className="border-2 rounded-xl  shadow-lg mb-4 py-3 overflow-hidden w-full bg-gradient-to-tl from-slate-50 to-slate-100">
+                  <div className="flex flex-col items-center justify-center pt-4 mx-3">
+                      <div className="text-center flex flex-col items-center justify-center">
+                         {loading ? ( <div className="w-28 h-28 bg-gray-200 rounded-full animate-pulse"></div>):( <img className="w-28 h-28 shadow-md object-cover object-center p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
+                          src={formData.imageUrl || "/images/avatar.jpeg"}
+                          alt="user profile pic"/>)}
+                          <p className="font-bold text-lg text-gray-700 py-2">
+                          {loading ? (
+                                  <span className="bg-gray-200 h-5 w-24 rounded animate-pulse"></span>
+                              ) : (
+                                  `@${formData.username || "UserNotFound"}`
+                              )}
+          </p>
+      
+          <div className=" bg-white rounded-lg p-8 space-y-2">
+            <div className="flex flex-row items-center space-x-2  justify-center  rounded-lg">
+              <IconUserBitcoin width={18} height={18} />
+              <p className="text-sm">General Information
+             
+                
+              </p>
+              
+            
             </div>
-            <Toaster/>
-            <div className="md:items-center items-center justify-center flex flex-col w-11/12 md:w-7/12">
-                <div className="flex flex-row items-start">
-                    <div className="border-2 rounded-xl  shadow-lg mb-4 py-3 overflow-hidden w-full bg-gradient-to-tl from-slate-50 to-slate-100">
-                        <div className="flex flex-col items-center justify-center pt-4 mx-3">
-                            <div className="text-center flex flex-col items-center justify-center">
-                                <img className="w-28 h-28 shadow-md object-cover object-center p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
-                                src={formData.imageUrl || "/images/avatar.jpeg"}
-                                alt="user profile pic"/>
-                                <p className="font-bold text-lg text-gray-700 py-2">
-                  @{`${formData.username}` || `UserNotFound`}
+            <p className="text-sm font-semibold ">
+            {loading ? (
+                                  <div className="bg-gray-200 h-4 w-48 rounded animate-pulse">
+                                  
+                                  </div>
+                              ) : (
+                                  `${formData.first_name} ${formData.last_name}`
+                              )}
                 </p>
-                <p className="text-sm text-gray-700 py-1">
-                  {formData.info || "We making digital Identity easier..."}
+            
+            <p className="text-sm font-semibold text-gray-700">
+              About me
+            </p>
+            <p className="text-sm ">
+            {loading ? (
+                                  <div className="bg-gray-200 h-4 w-64 rounded animate-pulse"></div>
+                              ) : (
+                                  formData.info || "We making digital Identity easier..."
+                              )}
+            </p>
+            <div className="grid grid-cols-2 pt-3 gap-2">
+              <div className="py-2">
+                <div className="flex flex-row items-center space-x-1   rounded-lg">
+                  <IconSchool width={17} height={17} />
+                  <p className="text-sm">Education</p>
+                </div>
+                <p className="text-xs font-semibold ">
+                {loading ? (
+                                              <div className="bg-gray-200 h-4 w-32 rounded animate-pulse"></div>
+                                          ) : (
+                                              formData.education|| "N/A"
+                                          )}
+                 
                 </p>
-                <div className=" bg-white rounded-lg p-3 space-y-2">
-                  <div className="flex flex-row items-center space-x-2   rounded-lg">
-                    <IconUserBitcoin width={18} height={18} />
-                    <p className="text-sm">General Information</p>
-                  </div>
-                  <p className="text-sm font-semibold text-gray-700">
-                    About me
-                  </p>
-                  <p className="text-sm ">
-                    {formData.info || "We making digital Identity easier..."}
-                  </p>
-                  <div className="grid grid-cols-2 pt-3 gap-2">
-                    <div className="py-2">
-                      <div className="flex flex-row items-center space-x-1   rounded-lg">
-                        <IconSchool width={17} height={17} />
-                        <p className="text-sm">Education</p>
-                      </div>
-                      <p className="text-xs font-semibold ">
-                        {formData.education ||
-                          "Thomas Jeff High School, Stanford University"}
-                      </p>
-                    </div>
-                    <div className="py-2">
-                      <div className="flex flex-row items-center space-x-1   rounded-lg">
-                        <IconBriefcase2 width={17} height={17} />
-                        <p className="text-sm">Work History</p>
-                      </div>
-                      <p className="text-xs font-semibold ">
-                        {formData.work_history || "Twitch, Google, Apple"}
-                      </p>
-                    </div>
-                    <div className="py-2">
-                      <div className="flex flex-row items-center space-x-1   rounded-lg">
-                        <IconClockBitcoin width={17} height={17} />
-                        <p className="text-sm">Join Date</p>
-                      </div>
-                      <p className="text-xs font-semibold ">
-                        {formData.dateOfBirth || " 2024"}
-                      </p>
-                    </div>
+              </div>
+              <div className="py-2">
+                <div className="flex flex-row items-center space-x-1   rounded-lg">
+                  <IconBriefcase2 width={17} height={17} />
+                  <p className="text-sm">Work History</p>
+                </div>
+                <p className="text-xs font-semibold ">
+                {loading ? (
+                                              <div className="bg-gray-200 h-4 w-32 rounded animate-pulse"></div>
+                                          ) : (
+                                              formData.work_history|| "Twitch, Google, Apple"
+                                          )}
+                  {/* {formData.work_history || "Twitch, Google, Apple"} */}
+                </p>
+              </div>
+              <div className="py-2">
+                <div className="flex flex-row items-center space-x-1   rounded-lg">
+                  <IconClockBitcoin width={17} height={17} />
+                  <p className="text-sm">Join Date</p>
+                </div>
+                <p className="text-xs font-semibold ">
+                {loading ? (
+                                              <div className="bg-gray-200 h-4 w-32 rounded animate-pulse"></div>
+                                          ) : (
+                                              formData.dateOfBirth|| "2024"
+                                          )}
+                  {/* {formData.dateOfBirth || " 2024"} */}
+                </p>
+              </div>
 
-                    <div className="py-2">
-                      <div className="flex flex-row items-center space-x-1   rounded-lg">
-                        <IconCakeRoll width={17} height={17} />
-                        <p className="text-sm">Birthday</p>
-                      </div>
-                      <p className="text-xs font-semibold ">
-                        {formData.date_of_birth || " 15-08-1990"}
-                      </p>
-                    </div>
-                  </div>
+              <div className="py-2">
+                <div className="flex flex-row items-center space-x-1   rounded-lg">
+                  <IconCakeRoll width={17} height={17} />
+                  <p className="text-sm">Birthday</p>
                 </div>
-              </div>
-              <div className="flex flex-col w-full mt-2 ">
-                <div className=" pb-2 space-y-2">
-                  <p className="text-md font-medium">Skills</p>
-                </div>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-2 w-full ">
-                {formData?.skills?.map((skill: any) => (
-                  <div className="flex flex-row items-center bg-white w-max  space-x-2  px-3 py-2 rounded-lg">
-                    <p className="text-xs">{skill}</p>
-                  </div>
-                ))}
-              </div>
-              <div className="flex flex-col w-full mt-2 ">
-                <div className=" pb-1 space-y-2">
-                  <p className="text-md font-medium">Socials</p>
-                </div>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-5 gap-2 pt-1 w-full">
-                {formData.x && (
-                  <Link href={formData.x}>
-                    <div className="flex flex-row items-center justify-center bg-black px-3 py-2 rounded-lg cursor-pointer">
-                      <IconBrandX width={24} height={24} color="white" />
-                    </div>
-                  </Link>
-                )}
-                {formData.instagram && (
-                  <Link href={formData.instagram}>
-                    <div className="flex flex-row items-center justify-center bg-[#5b51d8] px-3 py-2 rounded-lg cursor-pointer">
-                      <IconBrandInstagram
-                        width={24}
-                        height={24}
-                        color="white"
-                      />
-                    </div>
-                  </Link>
-                )}
-                {formData.github && (
-                  <Link href={formData.github}>
-                    <div className="flex flex-row items-center justify-center bg-[#ff0000] px-3 py-2 rounded-lg cursor-pointer">
-                      <IconBrandGithubCopilot width={24} height={24} color="white" />
-                    </div>
-                  </Link>
-                )}
-                {formData.discord && (
-                  <Link href={formData.discord}>
-                    <div className="flex flex-row items-center justify-center bg-[#69c9d0] px-3 py-2 rounded-lg cursor-pointer">
-                      <IconBrandDiscord width={24} height={24} color="white" />
-                    </div>
-                  </Link>
-                )}
-                {formData.linkedin && (
-                  <Link href={formData.linkedin}>
-                    <div className="flex flex-row items-center justify-center bg-[#2867b2] px-3 py-2 rounded-lg cursor-pointer">
-                      <IconBrandLinkedin width={24} height={24} color="white" />
-                    </div>
-                  </Link>
-                )}
+                <p className="text-xs font-semibold ">
+                {loading ? (
+                                              <div className="bg-gray-200 h-4 w-32 rounded animate-pulse"></div>
+                                          ) : (
+                                              formData.date_of_birth|| "15-08-1990"
+                                          )}
+                  {/* {formData.date_of_birth || " 15-08-1990"} */}
+                </p>
               </div>
             </div>
-                    </div>
-                </div>
-            </div>
-          
+          </div>
         </div>
+        <div className="flex flex-col w-full mt-2 ">
+          <div className=" pb-2 space-y-2">
+            <p className="text-md font-medium">Skills</p>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2 w-full ">
+        {loading
+                          ? Array(3)
+                                .fill(null)
+                                .map((_, i) => (
+                                    <div key={i} className="bg-gray-200 h-6 w-20 rounded animate-pulse"></div>
+                                ))
+                          : formData.skills.map((skill: any, i: number) => (
+                                <div key={i} className="bg-white px-3 py-2 rounded-lg">
+                                    <p className="text-xs">{skill}</p>
+                                </div>
+                            ))}
+        </div>
+        <div className="flex flex-col w-full mt-2 ">
+          <div className=" pb-1 space-y-2">
+            <p className="text-md font-medium">Socials</p>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-2 pt-1 w-full">
+          {formData.x && (
+            <Link href={formData.x}>
+              <div className="flex flex-row items-center justify-center bg-black px-3 py-2 rounded-lg cursor-pointer">
+                <IconBrandX width={24} height={24} color="white" />
+              </div>
+            </Link>
+          )}
+          {formData.instagram && (
+            <Link href={formData.instagram}>
+              <div className="flex flex-row items-center justify-center bg-[#5b51d8] px-3 py-2 rounded-lg cursor-pointer">
+                <IconBrandInstagram
+                  width={24}
+                  height={24}
+                  color="white"
+                />
+              </div>
+            </Link>
+          )}
+          {formData.github && (
+            <Link href={formData.github}>
+              <div className="flex flex-row items-center justify-center bg-[#ff0000] px-3 py-2 rounded-lg cursor-pointer">
+                <IconBrandGithubCopilot width={24} height={24} color="white" />
+              </div>
+            </Link>
+          )}
+          {formData.discord && (
+            <Link href={formData.discord}>
+              <div className="flex flex-row items-center justify-center bg-[#69c9d0] px-3 py-2 rounded-lg cursor-pointer">
+                <IconBrandDiscord width={24} height={24} color="white" />
+              </div>
+            </Link>
+          )}
+          {formData.linkedin && (
+            <Link href={formData.linkedin}>
+              <div className="flex flex-row items-center justify-center bg-[#2867b2] px-3 py-2 rounded-lg cursor-pointer">
+                <IconBrandLinkedin width={24} height={24} color="white" />
+              </div>
+            </Link>
+          )}
+        </div>
+      </div>
+              </div>
+          </div>
+      </div>
+    
+  </div>
     )
 }
 export default UserProfile;
