@@ -11,6 +11,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 const Section=()=>{
+  const [loading, setLoading] = useState(true);
     const[formData , setFormData]=useState<any>({
         first_name: "",
         last_name: "",
@@ -79,7 +80,9 @@ try {
     })
     console.log("got user details" , userInfo);
     console.log("got userName", username);
+    setLoading(false);
 } catch (error) {
+  setLoading(false);
       toast({
         title:"Error",
         description:"User Doesn't exist",
@@ -114,9 +117,9 @@ getUserInfo();
                     <div className="border-2 rounded-xl  shadow-lg mb-4 py-3 overflow-hidden w-full bg-gradient-to-tl from-slate-50 to-slate-100">
                         <div className="flex flex-col items-center justify-center pt-4 mx-3">
                             <div className="text-center flex flex-col items-center justify-center">
-                                <img className="w-28 h-28 shadow-md object-cover object-center p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
+                               {loading ? ( <div className="w-28 h-28 bg-gray-200 rounded-full animate-pulse"></div>):( <img className="w-28 h-28 shadow-md object-cover object-center p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
                                 src={formData.imageUrl || "/images/avatar.jpeg"}
-                                alt="user profile pic"/>
+                                alt="user profile pic"/>)}
                                 <p className="font-bold text-lg text-gray-700 py-2">
                   @{`${formData.username}` || `UserNotFound`}
                 </p>
